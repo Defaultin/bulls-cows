@@ -27,6 +27,10 @@ def game(size):
         bulls = int(input("Введите количество быков: "))
         cows = int(input("Введите количество коров: "))
         user_guess = input("Введите вашу догадку: ")
+              
+        if user_guess == pc_secret and len(for_cheat) > 1:
+            for_cheat.remove(tuple(pc_secret))
+            pc_secret = ''.join(choice(for_cheat))
 
         if bulls == size and user_guess == pc_secret:
             print(f"\nНичья! \nВаше число: {''.join(guess)}. \nМоё число: {pc_secret}.")
@@ -36,14 +40,10 @@ def game(size):
             print(f"\nХа-ха-ха! Вы проиграли! \nЗагаданное мною число — {pc_secret}.")
             total_score['computer'] += 1
             break
-        elif user_guess == pc_secret:
-            if len(for_cheat) > 1:
-                for_cheat.remove(tuple(pc_secret))
-                pc_secret = ''.join(choice(for_cheat))
-            else:     
-                print("\nПоздравляю, вы выйграли!")
-                total_score['user'] += 1
-                break
+        elif user_guess == pc_secret:  
+            print("\nПоздравляю, вы выйграли!")
+            total_score['user'] += 1
+            break
 
         choices = [c for c in choices if scorecalc(c, guess) == (bulls, cows)]
         if not choices:
