@@ -14,7 +14,7 @@ def scorecalc(guess, answer):
 
 def game(size):
     choices = list(permutations(digits, size))
-    shuffle(choices); shuffle(for_cheat)
+    shuffle(choices);
     pc_secret = ''.join(choice(choices))
     attempt = 0
     user_history = []
